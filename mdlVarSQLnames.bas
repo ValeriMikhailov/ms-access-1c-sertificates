@@ -1,0 +1,87 @@
+Attribute VB_Name = "mdlVarSQLnames"
+Option Compare Database
+Option Explicit
+
+    Public SQLtest As String
+    
+    Public dateEndRegUdSQL As String
+    Public specCompectSQL As String
+    Public templateSQL As String
+'editing bases after import
+    Public articulSQL As String
+    Public articulSplitSQL As String
+    Public authorSQL As String
+    Public getCsvDsSQL As String
+    Public getCsvRuSQL As String
+    Public getCsvSsSQL As String
+    Public getCsvUtsiSQL As String
+    Public descrSQL As String
+    Public doubleRowsSQL As String
+    Public doubleRowsDelSQL As String
+    Public changesRegUdSQL As String
+    Public changesRegUdTo1CSQL As String
+    Public countPlaceisSQL As String
+    Public getDsSQL As String
+    Public getFTSpp312SQL As String
+    Public getPP1042SQL As String
+    Public getPP688SQL As String
+    Public getRuSQL As String
+    Public getRuNotUpdatedSQL As String
+    Public getSsSQL As String
+    Public getUtsiSQL As String
+    Public exportTo1CSQL As String
+    Public foldersSQL As String
+    Public kaNomenclatureSQL As String
+    Public kaJoinMainSQL As String
+    Public kaRightMainSQL As String
+    Public listKeysTableNameSQL As String
+    Public linksDoublesRUsearchSQL As String
+    Public linksRUsearchSQL As String
+    Public mainBaseSQLtoDescr As String
+    Public mainBaseSQLtoRegUd1C As String
+    Public mainBaseSQLDelRow As String
+    Public mainDBendSsDsSQL As String
+    Public mainSQL As String
+    Public main1SQL As String
+    Public mainNomenclatureSQL As String
+    Public MedCodSQL As String
+    Public MedCod_1cSQL As String
+    Public okpRegUdSQL As String
+    Public pathRegUdSQL As String
+    Public pathSertificatesSQL As String
+    Public pathUtsiSQL As String
+    Public postSQL As String
+    Public produceSQL As String
+    Public receiptsSQL As String
+    Public receiptsRegUdSQL As String
+    Public regUdSQLdelRow As String
+    Public replaceSQL As String
+    Public regUdDescrSQL As String
+    Public regUdSearchSQL As String
+    Public sellerSQL As String
+    Public sizeBruttoSQL As String
+    Public sizeDescrSQL As String
+    Public specComplDataSQL As String
+    Public specComplResultSQL As String
+    Public splitOtkazSQL As String
+    Public splitRowSQL As String
+    Public tnvedSQL As String
+    Public tnvedSQLALL As String
+'    Public alterSQL As String
+
+' form SsDs queries
+    Public endSsDsSQL As String
+    Public endUtsiSQL As String
+    Public endDsTo1cSQL As String
+    Public endSsTo1cSQL As String
+    Public endUtsiTo1cSQL As String
+    Public endDsSsLeftoverSQL As String
+    Public fromLinksSQL As String
+    Public mainDsSQL As String
+    Public mainSsSQL As String
+    Public mainUtsiSQL As String
+    Public toSsDsSQL As String
+    Public toUtsiSQL As String
+    Public SsDsMoviesSQL As String
+    Public SsDsPostDsSQL As String
+
