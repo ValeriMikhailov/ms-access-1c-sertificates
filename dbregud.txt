@@ -1,0 +1,70 @@
+========== General ===========
+Name:	importrubase
+Owner:	posgresql
+Schema:	public
+========== Definition/Language ===========
+sql
+========== Сode ===========
+DELETE FROM dbregud;
+
+COPY dbregud FROM 'D:\reestrRegUd\newcsv.csv' DELIMITER ';' CSV HEADER;
+
+UPDATE dbregud SET registration_date = replace(registration_date, '00.2000', '01.2000');
+UPDATE dbregud SET registration_date_end = replace(registration_date_end, '00.2000', '01.2000');
+UPDATE dbregud SET registration_date_end = replace(registration_date_end, 'Отменено с ', '');
+UPDATE dbregud SET registration_date_end = replace(registration_date_end, 'Не действует согласно подпункту «б» пункта 2 постановления Правительства Российской Федерации от 27.12.2012 № 1416', '01.01.2021');
+UPDATE dbregud SET name = REPLACE(name, '<br>', chr(32));
+UPDATE dbregud SET name = REPLACE(name, chr(160), chr(32));
+UPDATE dbregud SET name = REPLACE(name, chr(9), chr(32));
+UPDATE dbregud SET name = REPLACE(name, chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32), chr(32));
+UPDATE dbregud SET name = REPLACE(name, chr(32)||chr(32)||chr(32), chr(32));
+UPDATE dbregud SET name = REPLACE(name, chr(32)||chr(32)||chr(32), chr(32));
+UPDATE dbregud SET name = REPLACE(name, chr(32)||chr(32), chr(32));
+UPDATE dbRegUd SET producer = REPLACE(producer,chr(34),'');
+UPDATE dbRegUd SET okp = REPLACE(okp,chr(160),'');
+UPDATE dbRegUd SET okp = REPLACE(okp,chr(32),'');
+UPDATE dbRegUd SET okp = REPLACE(okp,chr(9),'');
+
+COPY (SELECT registration_number,registration_date,RIGHT(registration_date_end,10) AS registration_date_end,LEFT(name,31300) AS name,producer,okp,kind FROM public.dbregud)
+TO 'D:\reestrRegUd\regUd.csv' WITH (FORMAT CSV, DELIMITER ';', HEADER);
+
+SELECT registration_number,registration_date,registration_date_end,producer,okp,kind,name FROM public.dbregud;
+
+========== SQL ===========
+CREATE OR REPLACE PROCEDURE public.importrubase()
+    LANGUAGE 'sql'
+    
+AS $BODY$
+DELETE FROM dbregud;
+
+COPY dbregud FROM 'D:\reestrRegUd\newcsv.csv' DELIMITER ';' CSV HEADER;
+
+UPDATE dbregud SET registration_date = replace(registration_date, '00.2000', '01.2000');
+UPDATE dbregud SET registration_date_end = replace(registration_date_end, '00.2000', '01.2000');
+UPDATE dbregud SET registration_date_end = replace(registration_date_end, 'Отменено с ', '');
+UPDATE dbregud SET registration_date_end = replace(registration_date_end, 'Не действует согласно подпункту «б» пункта 2 постановления Правительства Российской Федерации от 27.12.2012 № 1416', '01.01.2021');
+UPDATE dbregud SET name = REPLACE(name, '<br>', chr(32));
+UPDATE dbregud SET name = REPLACE(name, chr(160), chr(32));
+UPDATE dbregud SET name = REPLACE(name, chr(9), chr(32));
+UPDATE dbregud SET name = REPLACE(name, chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32)||chr(32), chr(32));
+UPDATE dbregud SET name = REPLACE(name, chr(32)||chr(32)||chr(32), chr(32));
+UPDATE dbregud SET name = REPLACE(name, chr(32)||chr(32)||chr(32), chr(32));
+UPDATE dbregud SET name = REPLACE(name, chr(32)||chr(32), chr(32));
+UPDATE dbRegUd SET producer = REPLACE(producer,chr(34),'');
+UPDATE dbRegUd SET okp = REPLACE(okp,chr(160),'');
+UPDATE dbRegUd SET okp = REPLACE(okp,chr(32),'');
+UPDATE dbRegUd SET okp = REPLACE(okp,chr(9),'');
+
+COPY (SELECT registration_number,registration_date,RIGHT(registration_date_end,10) AS registration_date_end,LEFT(name,31300) AS name,producer,okp,kind FROM public.dbregud)
+TO 'D:\reestrRegUd\regUd.csv' WITH (FORMAT CSV, DELIMITER ';', HEADER);
+
+SELECT registration_number,registration_date,registration_date_end,producer,okp,kind,name FROM public.dbregud;registration_date
+$BODY$;
+
+========== Query ===========
+-- CALL importrubase();
+-- SELECT registration_number,registration_date,registration_date_end,producer,okp,kind,name FROM public.dbregud;
+-- SELECT unique_number,registration_number FROM public.dbregud ORDER BY unique_number DESC;
+SELECT registration_number,producer,name FROM public.dbregud
+WHERE registration_number LIKE '%ФСР 2011/10723'
+ORDER BY name;
