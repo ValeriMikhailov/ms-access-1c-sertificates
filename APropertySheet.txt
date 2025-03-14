@@ -1,0 +1,4 @@
+'включить свойства формы
+'Ctrl + G
+CommandBars("Property Sheet").Enabled = True
+'Enter
